@@ -101,6 +101,7 @@
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!--
@@ -109,6 +110,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Test Dependencies -->
@@ -116,6 +118,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
         <!--
           Add the slf4j-log4j12 dependency jar for testing
@@ -123,7 +126,25 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
+            <scope>test</scope>
         </dependency>
+        
+        <dependency>
+      <!-- scope is compile so all features (there is only one) are installed into startup.properties,
+      and the feature repo itself is not added in etc/org.apache.karaf.features.cfg file -->
+	      	<groupId>org.jboss.fuse</groupId>
+	      	<artifactId>fuse-karaf-framework</artifactId>
+	      	<version>6.2.1.redhat-084</version>
+	      	<type>kar</type>
+	      <!-- no need to download kar dependencies -->
+	      	<exclusions>
+	        	<exclusion>
+	          	<groupId>*</groupId>
+	          	<artifactId>*</artifactId>
+	        	</exclusion>
+	      	</exclusions>
+    	</dependency>
+        
     </dependencies>
 
 
@@ -232,6 +253,9 @@
 		            <feature>camel-jetty</feature>
 		            <feature>camel-jackson</feature>
 		            <feature>camel-xstream</feature>
+		            <feature>camel-http</feature>
+		            <feature>cxf-http</feature>
+		            <feature>http</feature>
 		          </startupFeatures>
 		          <startupBundles>
 		            <bundle>mvn:${project.groupId}/${project.artifactId}/${project.version}</bundle>
